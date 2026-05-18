@@ -11,7 +11,7 @@ const initDB = async () => {
         email VARCHAR(200) NOT NULL UNIQUE,
         password TEXT NOT NULL CHECK (LENGTH(password)>=6),
         phone VARCHAR(20) NOT NULL,
-        role VARCHAR(20) NOT NULL CHECK (role IN ('admin','customer'))
+        role VARCHAR(20) NOT NULL CHECK (role IN ('admin','customer')) DEFAULT 'customer'
     )
     `);
   // vehicles table
