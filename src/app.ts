@@ -1,5 +1,12 @@
 import express, { Request, Response } from "express";
+import initDB from "./config/db";
 const app = express();
+//middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//init db
+initDB();
 
 // default get
 app.get("", (req: Request, res: Response) => {
