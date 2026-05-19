@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import initDB from "./config/db";
 import { authRoutes } from "./modules/auth/auth.routes";
+import { vehiclesRoutes } from "./modules/vehicles/vehicles.routes";
 const version = "/api/v1";
 const app = express();
 //middlewares
@@ -12,6 +13,7 @@ initDB();
 
 // routes
 app.use(`${version}/auth`, authRoutes);
+app.use(`${version}/vehicles`, vehiclesRoutes);
 
 // default get
 app.get("", (req: Request, res: Response) => {
