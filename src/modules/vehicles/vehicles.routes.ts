@@ -7,5 +7,7 @@ const router = Router();
 
 //create vehicle
 router.post("/", verifyUser("admin"), vehiclesControllers.createVehicle);
+//get all vehicles
+router.get("/", vehiclesControllers.getAllVehicles);
 
 export const vehiclesRoutes = router;
