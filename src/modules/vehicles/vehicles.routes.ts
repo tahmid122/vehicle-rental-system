@@ -17,5 +17,11 @@ router.put(
   verifyUser(UserRole.ADMIN),
   vehiclesControllers.updateVehicle,
 );
+//delete vehicle admin only
+router.delete(
+  "/:vehicleId",
+  verifyUser(UserRole.ADMIN),
+  vehiclesControllers.deleteVehicle,
+);
 
 export const vehiclesRoutes = router;
