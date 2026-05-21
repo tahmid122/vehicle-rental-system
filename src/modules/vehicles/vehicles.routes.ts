@@ -9,5 +9,7 @@ const router = Router();
 router.post("/", verifyUser("admin"), vehiclesControllers.createVehicle);
 //get all vehicles
 router.get("/", vehiclesControllers.getAllVehicles);
+//get vehicle by id
+router.get("/:vehicleId", vehiclesControllers.getVehicleById);
 
 export const vehiclesRoutes = router;

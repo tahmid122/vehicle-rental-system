@@ -28,4 +28,17 @@ const getAllVehicles = async () => {
   `);
 };
 
-export const vehiclesServices = { createVehicle, getAllVehicles };
+const getVehicleById = async (id: string) => {
+  return await pool.query(
+    `
+      SELECT * FROM vehicles WHERE id=$1
+    `,
+    [id],
+  );
+};
+
+export const vehiclesServices = {
+  createVehicle,
+  getAllVehicles,
+  getVehicleById,
+};
