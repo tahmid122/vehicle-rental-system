@@ -16,9 +16,6 @@ const getAllUsers = async (req: Request, res: Response) => {
 const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
-    if (req.user && Number(userId) !== req.user.id) {
-      throw new Error("User can not updated other user profile");
-    }
     const result = await usersServices.updateUser(req.body, userId as string);
     if (result.rows[0]) {
       return res.status(201).json({
