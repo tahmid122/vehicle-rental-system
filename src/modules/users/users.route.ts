@@ -7,5 +7,10 @@ const router = Router();
 
 //get all users
 router.get("/", verifyUser(UserRole.ADMIN), usersControllers.getAllUsers);
-
+//update user
+router.put(
+  "/:userId",
+  verifyUser(UserRole.ADMIN, UserRole.CUSTOMER),
+  usersControllers.updateUser,
+);
 export const usersRoutes = router;
