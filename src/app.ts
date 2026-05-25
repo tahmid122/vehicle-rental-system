@@ -3,6 +3,7 @@ import initDB from "./config/db";
 import { authRoutes } from "./modules/auth/auth.routes";
 import { vehiclesRoutes } from "./modules/vehicles/vehicles.routes";
 import { usersRoutes } from "./modules/users/users.route";
+import { bookingsRoutes } from "./modules/bookings/bookings.routes";
 const version = "/api/v1";
 const app = express();
 //middlewares
@@ -16,6 +17,7 @@ initDB();
 app.use(`${version}/auth`, authRoutes);
 app.use(`${version}/vehicles`, vehiclesRoutes);
 app.use(`${version}/users`, usersRoutes);
+app.use(`${version}/bookings`, bookingsRoutes);
 
 // default get
 app.get("", (req: Request, res: Response) => {
