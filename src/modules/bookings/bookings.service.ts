@@ -41,4 +41,17 @@ const getAllBookings = async (role: string, id: number) => {
 
   return isADmin ? await pool.query(query) : await pool.query(query, [id]);
 };
-export const bookingsServices = { createBooking, getAllBookings };
+const updateBooking = async (bookingId: string, role: string) => {
+  const status = role === UserRole.ADMIN ? "returned" : "cancelled";
+  return await pool.query(
+    `
+     UPDATE bookings SET status=$1 WHERE id=$2 RETURNING *
+    `,
+    [status, bookingId],
+  );
+};
+export const bookingsServices = {
+  createBooking,
+  getAllBookings,
+  updateBooking,
+};
