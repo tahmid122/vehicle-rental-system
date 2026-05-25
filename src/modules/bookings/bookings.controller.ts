@@ -22,4 +22,26 @@ const createBooking = async (req: Request, res: Response) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
-export const bookingControllers = { createBooking };
+const getAllBookings = async (req: Request, res: Response) => {
+  try {
+    const role = req.user?.role;
+    const id = req.user?.id;
+    const result = await bookingsServices.getAllBookings(role, id);
+    if (result.rows.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: "Bookings retrieved successfully",
+        data: result.rows,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        message: "0 bookings found",
+        data: result.rows,
+      });
+    }
+  } catch (error: any) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+export const bookingControllers = { createBooking, getAllBookings };

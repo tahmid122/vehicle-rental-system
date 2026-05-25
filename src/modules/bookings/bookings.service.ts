@@ -1,4 +1,5 @@
 import { pool } from "../../config/db";
+import { UserRole } from "../../types/role";
 
 const createBooking = async (payload: Record<string, unknown>) => {
   const { customer_id, vehicle_id, rent_start_date, rent_end_date } = payload;
@@ -32,5 +33,12 @@ const createBooking = async (payload: Record<string, unknown>) => {
     ],
   );
 };
+const getAllBookings = async (role: string, id: number) => {
+  const isADmin = role === UserRole.ADMIN;
+  const query = isADmin
+    ? `SELECT * FROM bookings`
+    : `SELECT * FROM bookings WHERE customer_id=$1`;
 
-export const bookingsServices = { createBooking };
+  return isADmin ? await pool.query(query) : await pool.query(query, [id]);
+};
+export const bookingsServices = { createBooking, getAllBookings };
